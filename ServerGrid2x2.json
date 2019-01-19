@@ -1,0 +1,186 @@
+{
+  "BaseServerArgs": "",
+  "gridSize": 1000000.0,
+  "MetaWorldURL": "",
+  "WorldFriendlyName": "Single Tile Default",
+  "WorldAtlasId": "245701350",
+  "AuthListURL": "",
+  "WorldAtlasPassword": "",
+  "ModIDs": "",
+  "MapImageURL": "",
+  "totalGridsX": 1,
+  "totalGridsY": 1,
+  "bUseUTCTime": true,
+  "columnUTCOffset": 0.0,
+  "Day0": "2019-01-18 23:36:34",
+  "globalTransitionMinZ": 0.0,
+  "AdditionalCmdLineParams": "",
+  "OverrideShooterGameModeDefaultGameIni": {},
+  "globalGameplaySetup": "",
+  "coordsScaling": 0.000390184316,
+  "showServerInfo": true,
+  "showDiscoZoneInfo": true,
+  "showShipPathsInfo": true,
+  "showIslandNames": true,
+  "showBackground": true,
+  "backgroundImgPath": "./WaterTiles/instinctworld-autoscaling.png",
+  "discoZonesImagePath": "Resources/discoZoneBox.png",
+  "servers": [
+    {
+      "gridX": 0,
+      "gridY": 0,
+      "MachineIdTag": "",
+      "ip": "",
+      "name": "",
+      "port": 0,
+      "gamePort": 0,
+      "seamlessDataPort": 27000,
+      "isHomeServer": false,
+      "OverrideShooterGameModeDefaultGameIni": {},
+      "floorZDist": 0,
+      "utcOffset": 0,
+      "transitionMinZ": 0,
+      "GlobalBiomeSeamlessServerGridPreOffsetValues": "",
+      "GlobalBiomeSeamlessServerGridPreOffsetValuesOceanWater": "",
+      "OceanDinoDepthEntriesOverride": "",
+      "oceanFloatsamCratesOverride": "",
+      "treasureMapLootTablesOverride": "",
+      "oceanEpicSpawnEntriesOverrideTemplateName": "",
+      "NPCShipSpawnEntriesOverrideTemplateName": "",
+      "regionOverrides": "",
+      "waterColorR": 0.0,
+      "waterColorG": 0.0,
+      "waterColorB": 0.0,
+      "skyStyleIndex": 0,
+      "sublevels": [
+        {
+          "name": "Cay_C_Far_07_PVE",
+          "additionalTranslationX": -40770.4375,
+          "additionalTranslationY": -40037.72,
+          "additionalTranslationZ": 0.0,
+          "additionalRotationPitch": 0.0,
+          "additionalRotationYaw": 0.0,
+          "additionalRotationRoll": 0.0,
+          "id": 4,
+          "landscapeMaterialOverride": -1
+        },
+        {
+          "name": "Cay_C_Farthest_07_PVE",
+          "additionalTranslationX": -40770.4375,
+          "additionalTranslationY": -40037.72,
+          "additionalTranslationZ": 0.0,
+          "additionalRotationPitch": 0.0,
+          "additionalRotationYaw": 0.0,
+          "additionalRotationRoll": 0.0,
+          "id": 4,
+          "landscapeMaterialOverride": -1
+        },
+        {
+          "name": "Cay_C_Near_07_PVE",
+          "additionalTranslationX": -40770.4375,
+          "additionalTranslationY": -40037.72,
+          "additionalTranslationZ": 0.0,
+          "additionalRotationPitch": 0.0,
+          "additionalRotationYaw": 0.0,
+          "additionalRotationRoll": 0.0,
+          "id": 4,
+          "landscapeMaterialOverride": -1
+        },
+        {
+          "name": "Cay_C_PVE",
+          "additionalTranslationX": -40770.4375,
+          "additionalTranslationY": -40037.72,
+          "additionalTranslationZ": 0.0,
+          "additionalRotationPitch": 0.0,
+          "additionalRotationYaw": 0.0,
+          "additionalRotationRoll": 0.0,
+          "id": 4,
+          "landscapeMaterialOverride": -1
+        },
+        {
+          "name": "Cay_C_Marine_Warm_Near",
+          "additionalTranslationX": -40770.4375,
+          "additionalTranslationY": -40037.72,
+          "additionalTranslationZ": 0.0,
+          "additionalRotationPitch": 0.0,
+          "additionalRotationYaw": 0.0,
+          "additionalRotationRoll": 0.0,
+          "id": 4,
+          "landscapeMaterialOverride": -1
+        }
+      ],
+      "lastModified": "2019-01-18T23:45:57.2874959Z",
+      "lastImageOverride": "0001-01-01T00:00:00",
+      "islandLocked": false,
+      "discoLocked": false,
+      "pathsLocked": false,
+      "totalExtraSublevels": [
+        "MasterIBL_Tropical",
+        "MasterIBL_Tropical_Canopy_Oak",
+        "MasterIBL_Tropical_Canopy_RE"
+      ],
+      "islandInstances": [
+        {
+          "name": "Cay_C_EE_PVE",
+          "id": 4,
+          "spawnerOverrides": {},
+          "minTreasureQuality": -1.0,
+          "maxTreasureQuality": -1.0,
+          "useNpcVolumesForTreasures": false,
+          "useLevelBoundsForTreasures": true,
+          "prioritizeVolumesForTreasures": false,
+          "islandTreasureBottleSupplyCrateOverrides": "",
+          "worldX": 459229.563,
+          "worldY": 459962.281,
+          "rotation": 0.0
+        }
+      ],
+      "discoZones": [],
+      "spawnRegions": []
+    }
+  ],
+  "spawnerOverrideTemplates": [
+    {
+      "Name": "SpawnerTemplate1",
+      "NPCSpawnEntries": "((AnEntryName=\"Stego One to Three\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Stego/Stego_Character_BP.Stego_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Para/Para_Character_BP.Para_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Para/Para_Character_BP.Para_Character_BP_C'),NPCsSpawnOffsets=((X=0.000000,Y=0.000000,Z=0.000000),(X=0.000000,Y=680.000000,Z=0.000000),(X=0.000000,Y=-680.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000,0.380000,0.150000),LevelDifficultyTestOverride=1.000000),(AnEntryName=\"Trike One to Three\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Para/Para_Character_BP.Para_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Para/Para_Character_BP.Para_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Trike/Trike_Character_BP.Trike_Character_BP_C'),NPCsSpawnOffsets=((X=0.000000,Y=0.000000,Z=0.000000),(X=0.000000,Y=680.000000,Z=0.000000),(X=0.000000,Y=-680.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000,0.500000,0.150000),LevelDifficultyTestOverride=1.000000))",
+      "NPCSpawnLimits": "((NPCClass=BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Stego/Stego_Character_BP.Stego_Character_BP_C',MaxPercentageOfDesiredNumToAllow=1))",
+      "MaxDesiredNumEnemiesMultiplier": 1.0
+    },
+    {
+      "Name": "SpawnerTemplate2",
+      "NPCSpawnEntries": "((AnEntryName=\"Stego One to Three\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Dodo/TurkeyBase_Character_BP.TurkeyBase_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Dodo/TurkeyBase_Character_BP.TurkeyBase_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Dodo/TurkeyBase_Character_BP.TurkeyBase_Character_BP_C'),NPCsSpawnOffsets=((X=0.000000,Y=0.000000,Z=0.000000),(X=0.000000,Y=680.000000,Z=0.000000),(X=0.000000,Y=-680.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000,0.380000,0.150000),LevelDifficultyTestOverride=2.000000),(AnEntryName=\"Trike One to Three\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Dodo/TurkeyBase_Character_BP.TurkeyBase_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Dodo/TurkeyBase_Character_BP.TurkeyBase_Character_BP_C',BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Dodo/TurkeyBase_Character_BP.TurkeyBase_Character_BP_C'),NPCsSpawnOffsets=((X=0.000000,Y=0.000000,Z=0.000000),(X=0.000000,Y=680.000000,Z=0.000000),(X=0.000000,Y=-680.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000,0.500000,0.150000),LevelDifficultyTestOverride=2.000000))",
+      "NPCSpawnLimits": "((NPCClass=BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Stego/Stego_Character_BP.Stego_Character_BP_C',MaxPercentageOfDesiredNumToAllow=2))",
+      "MaxDesiredNumEnemiesMultiplier": 2.0
+    },
+    {
+      "Name": "FailureTest",
+      "NPCSpawnEntries": "",
+      "NPCSpawnLimits": "",
+      "MaxDesiredNumEnemiesMultiplier": -1.0
+    },
+    {
+      "Name": "SpawnerTrike",
+      "NPCSpawnEntries": "((AnEntryName=\"Carnos\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Trike/Trike_Character_BP.Trike_Character_BP_C'),NPCsSpawnOffsets=((X=0.000000,Y=0.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000)))",
+      "NPCSpawnLimits": "",
+      "MaxDesiredNumEnemiesMultiplier": 1.0
+    },
+    {
+      "Name": "SpawnerPtero",
+      "NPCSpawnEntries": "((AnEntryName=\"Ptero\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Ptero/Ptero_Character_BP.Ptero_Character_BP_C'),NPCsSpawnOffsets=((X=300.000000,Y=0.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000),EntryWeight=0.150000))(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Pelagornis/Pela_Character_BP.Pela_Character_BP_C'),NPCsSpawnOffsets=((X=300.000000,Y=0.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000),EntryWeight=0.150000))",
+      "NPCSpawnLimits": "",
+      "MaxDesiredNumEnemiesMultiplier": 1.5
+    },
+    {
+      "Name": "SpawnerAlloOrSarco",
+      "NPCSpawnEntries": "((AnEntryName=\"Sarco\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Sarco/Sarco_Character_BP.Sarco_Character_BP_C'),NPCsSpawnOffsets=((X=0.000000,Y=0.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000)),(AnEntryName=\"Allo\",NPCsToSpawn=(BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Allosaurus/Allo_Character_BP.Allo_Character_BP_C'),NPCsSpawnOffsets=((X=0.000000,Y=0.000000,Z=0.000000)),NPCsToSpawnPercentageChance=(1.000000),EntryWeight=0.200000))",
+      "NPCSpawnLimits": "((NPCClass=BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Sarco/Sarco_Character_BP.Sarco_Character_BP_C',MaxPercentageOfDesiredNumToAllow=0.800000),(NPCClass=BlueprintGeneratedClass'/Game/PrimalEarth/Dinos/Allosaurus/Allo_Character_BP.Allo_Character_BP_C',MaxPercentageOfDesiredNumToAllow=0.200000))",
+      "MaxDesiredNumEnemiesMultiplier": 1.2
+    }
+  ],
+  "idGenerator": 5,
+  "regionsIdGenerator": 0,
+  "shipPathsIdGenerator": 0,
+  "shipPaths": [],
+  "lastImageOverride": "0001-01-01T00:00:00",
+  "serverTemplates": []
+}
