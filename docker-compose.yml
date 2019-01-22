@@ -6,17 +6,21 @@ services:
     image: atlas-r
     container_name: atlas-r
     #command: redis-server /usr/redis/redis-cluster.conf --requirepass changeme
-    ports:
-      - 6379:6379
+    expose:
+      - "6379"
     networks:
         atlas:
           aliases:
             - atlas-r
     restart: on-failure
+    env_file: .env-atlas-r
+
   atlas-s:
     build:
       context: './atlas/'
     image: atlas-s
+    depends_on:
+            - atlas-r
     container_name: atlas-s
     networks:
       atlas:
@@ -25,6 +29,7 @@ services:
     ports:
       - 5701:5701
       - 57501:57501
+    env_file: .env-atlas-s
 
 networks:
   atlas:
