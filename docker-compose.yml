@@ -1,6 +1,6 @@
 version: '3'
 services:
-  redis:
+  atlas-r:
     build:
       context: './redis/'
     image: atlas-r
@@ -13,7 +13,7 @@ services:
           aliases:
             - atlas-r
     restart: on-failure
-  atlas:
+  atlas-s:
     build:
       context: './atlas/'
     image: atlas-s
