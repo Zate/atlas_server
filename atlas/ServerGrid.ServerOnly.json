@@ -33,33 +33,33 @@
   "DatabaseConnections": [
     {
       "Name": "Default",
-      "URL": "127.0.0.1",
+      "URL": "atlas-r",
       "Port": 6379,
-      "Password": ""
+      "Password": "changeme"
     },
     {
       "Name": "TribeDB",
-      "URL": "127.0.0.1",
+      "URL": "atlas-r",
       "Port": 6379,
-      "Password": ""
+      "Password": "changeme"
     },
     {
       "Name": "TravelDataDB",
-      "URL": "127.0.0.1",
+      "URL": "atlas-r",
       "Port": 6379,
-      "Password": ""
+      "Password": "changeme"
     },
     {
       "Name": "TerritoryDB",
-      "URL": "127.0.0.1",
+      "URL": "atlas-r",
       "Port": 6379,
-      "Password": ""
+      "Password": "changeme"
     },
     {
       "Name": "LogDB",
-      "URL": "127.0.0.1",
+      "URL": "atlas-r",
       "Port": 6379,
-      "Password": ""
+      "Password": "changeme"
     }
   ]
 }

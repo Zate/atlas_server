@@ -8,16 +8,16 @@ RUN apt-get update  && apt-get dist-upgrade -y &&\
         ln -fs /usr/share/zoneinfo/$TZ /etc/localtime &&\
         useradd -r -m -s /bin/bash steam
 USER steam
-RUN mkdir -p ~/.steamcmd  ~/.steam/sdk32 &&\
+RUN mkdir -p ~/bin ~/.steamcmd  ~/.steam/sdk32 &&\
         cd ~/.steamcmd &&\
-        wget https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz && \
+        wget -q https://steamcdn-a.akamaihd.net/client/installer/steamcmd_linux.tar.gz && \
         tar -xf steamcmd_linux.tar.gz && \
         rm steamcmd_linux.tar.gz && \
         ln -s ~/.steamcmd/linux32/steamclient.so ~/.steam/sdk32/steamclient.so && \
         ./steamcmd.sh +login anonymous +quit
-
-FROM steamcmdbase as atlas
+COPY update_atlas.sh ~/bin
+FROM steamcmdbase as atlas-s
 USER steam
 WORKDIR /home/steam/.steamcmd
-RUN mkdir -p ~/.atlas && \
-        ./steamcmd.sh +login anonymous +force_install_dir ~/.atlas +app_update 1006030 validate +quit
+RUN mkdir -p ~/.atlas
+#        ./steamcmd.sh +login anonymous +force_install_dir ~/.atlas +app_update 1006030 validate +quit

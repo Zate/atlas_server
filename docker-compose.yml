@@ -1,0 +1,31 @@
+version: '3'
+services:
+  redis:
+    build:
+      context: './redis/'
+    image: atlas-r
+    container_name: atlas-r
+    #command: redis-server /usr/redis/redis-cluster.conf --requirepass changeme
+    ports:
+      - 6379:6379
+    networks:
+        atlas:
+          aliases:
+            - atlas-r
+    restart: on-failure
+  atlas:
+    build:
+      context: './atlas/'
+    image: atlas-s
+    container_name: atlas-s
+    networks:
+      atlas:
+        aliases:
+          - atlas-s
+    ports:
+      - 5701:5701
+      - 57501:57501
+
+networks:
+  atlas:
+    driver: bridge
