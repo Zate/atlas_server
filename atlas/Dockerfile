@@ -31,12 +31,13 @@ RUN mkdir -p ~/bin ~/.steamcmd  ~/.steam/sdk32 &&\
         ./steamcmd.sh +login anonymous +quit
 COPY --chown=steam:steam start_server.sh update_atlas.sh update_map.sh /home/steam/bin/
 FROM steamcmdbase as atlas-s
-USER steam
-WORKDIR /home/steam/.steamcmd
+USER root
 RUN mkdir -p /home/steam/.atlas && \
         chown -R steam:steam /home/steam/.atlas && \
         chmod +x /home/steam/bin/*.sh
 #        ./steamcmd.sh +login anonymous +force_install_dir ~/.atlas +app_update 1006030 validate +quit\
 #ENTRYPOINT ["sh","/usr/local/bin/entrypoint.sh"]
+USER steam
+WORKDIR /home/steam/.steamcmd
 VOLUME /home/steam/.atlas
 CMD tail -f /dev/null
