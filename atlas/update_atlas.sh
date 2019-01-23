@@ -1,9 +1,9 @@
 #!/bin/bash
 
 
-export ATLAS_HOME=${USER}/.atlas
+export ATLAS_HOME=/home/${USER}/.atlas
 export STEAMCMD=~/.steamcmd
-export SHOOTERGAME="${ATLAS_HOME}/ShooterGame"
+export SHOOTERGAME=${ATLAS_HOME}/ShooterGame
 
 cd $STEAMCMD
 setfacl -Rm u:10000:rwx ${ATLAS_HOME}
