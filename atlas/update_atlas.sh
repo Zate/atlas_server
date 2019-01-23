@@ -18,7 +18,7 @@ if [ -d "$SHOOTERGAME" ]; then
     wget -q https://raw.githubusercontent.com/Zate/atlas_server/master/atlas/ServerGrid.json
     wget -q https://raw.githubusercontent.com/Zate/atlas_server/master/atlas/ServerGrid.ServerOnly.json
     wget -q https://github.com/Zate/atlas_server/raw/master/atlas/ServerGrid/CellImg_0-0.jpg -O $SHOOTERGAME/ServerGrid/CellImg_0-0.jpg
-    wget -q https://github.com/Zate/atlas_server/raw/master/atlas/ServerGrid/MapImg.jpg -O $SHOOTERGAME/ServerGrid/MapImg.jpg
+    wget -q https://github.com/Zate/atlas_server/raw/master/atlas/ServerGrid/MapIMG.jpg -O $SHOOTERGAME/ServerGrid/MapIMG.jpg
     setfacl -Rm u:10000:rwx ${ATLAS_HOME}
     exit 1
 fi
