@@ -33,7 +33,8 @@ COPY --chown=steam:steam start_server.sh update_atlas.sh update_map.sh /home/ste
 FROM steamcmdbase as atlas-s
 USER steam
 WORKDIR /home/steam/.steamcmd
-RUN mkdir -p ~/.atlas
+RUN mkdir -p ~/.atlas && \
+        chmod +x /home/steam/bin/*.sh
 #        ./steamcmd.sh +login anonymous +force_install_dir ~/.atlas +app_update 1006030 validate +quit\
 #ENTRYPOINT ["sh","/usr/local/bin/entrypoint.sh"]
 CMD tail -f /dev/null
