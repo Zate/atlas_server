@@ -31,7 +31,7 @@ services:
       - '${QUERYPORT}:${QUERYPORT}' #Query TCP
       - '${SEAMLESSPORT}:${SEAMLESSPORT}' #Seamless TCP
       - '${GAMEPORT1}:${GAMEPORT1}/udp' #Gameport1 UDP
-      - '${GAMEPORT2}:${GAMEPORT2}6/udp' #Gameport2 UDP
+      - '${GAMEPORT2}:${GAMEPORT2}/udp' #Gameport2 UDP
       - '${RCONPORT}:${RCONPORT}' #RCON Port TCP
     env_file: .env-atlas-s
     volumes:
