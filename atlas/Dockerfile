@@ -29,7 +29,7 @@ RUN mkdir -p ~/bin ~/.steamcmd  ~/.steam/sdk32 &&\
         rm steamcmd_linux.tar.gz && \
         ln -s ~/.steamcmd/linux32/steamclient.so ~/.steam/sdk32/steamclient.so && \
         ./steamcmd.sh +login anonymous +quit
-COPY --chown=steam:steam update_atlas.sh update_map.sh /home/steam/bin/
+COPY --chown=steam:steam start_server.sh update_atlas.sh update_map.sh /home/steam/bin/
 FROM steamcmdbase as atlas-s
 USER steam
 WORKDIR /home/steam/.steamcmd

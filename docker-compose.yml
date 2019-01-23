@@ -28,7 +28,10 @@ services:
           - atlas-s
     ports:
       - 5701:5701
+      - 5700:5700
+      - 57500:57500
       - 57501:57501
+      - 27020:27020
     env_file: .env-atlas-s
 
 networks:

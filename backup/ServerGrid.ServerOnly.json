@@ -31,7 +31,7 @@
     "S3KeyPrefix": ""
   },
   "DatabaseConnections": [
-      {
+    {
       "Name": "Default",
       "URL": "atlas-r",
       "Port": 6379,
