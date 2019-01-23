@@ -19,7 +19,7 @@ RUN apt-get update  && apt-get dist-upgrade -y &&\
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
         echo "$TZ" > /etc/timezone &&\
         ln -fs /usr/share/zoneinfo/$TZ /etc/localtime &&\
-        useradd -r -m -s /bin/bash steam
+        useradd -r -m -u 10000 -s /bin/bash steam
 USER steam
 RUN mkdir -p ~/bin ~/.steamcmd  ~/.steam/sdk32 &&\
         export PATH="~/bin:$PATH" && \
