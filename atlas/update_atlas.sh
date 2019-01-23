@@ -2,13 +2,16 @@
 
 
 export ATLAS_HOME=/home/${USER}/.atlas
+export REDIS_DATA=${ATLAS_HOME}/data
 export STEAMCMD=~/.steamcmd
 export SHOOTERGAME=${ATLAS_HOME}/ShooterGame
 
 cd $STEAMCMD
 setfacl -Rm u:10000:rwx ${ATLAS_HOME}
 ./steamcmd.sh +login anonymous +force_install_dir $ATLAS_HOME +app_update 1006030 validate +quit
-
+if [ -d "$REDIS_DATA" ]; then
+    mkdir -p $REDIS_DATA
+fi
 if [ -d "$SHOOTERGAME" ]; then
     cd $SHOOTERGAME
     pwd
