@@ -1,11 +1,12 @@
 #!/bin/bash
 
-ME=`whoami`
-ATLAS_HOME=${me}/.atlas
-STEAMCMD=~/.steamcmd
-SHOOTERGAME="${ATLAS_HOME}/ShooterGame"
+
+export ATLAS_HOME=${USER}/.atlas
+export STEAMCMD=~/.steamcmd
+export SHOOTERGAME="${ATLAS_HOME}/ShooterGame"
 
 cd $STEAMCMD
+setfacl -Rm u:10000:rwx ${ATLAS_HOME}
 ./steamcmd.sh +login anonymous +force_install_dir $ATLAS_HOME +app_update 1006030 validate +quit
 
 if [ -d "$SHOOTERGAME" ]; then
