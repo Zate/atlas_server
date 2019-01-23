@@ -7,7 +7,7 @@ export STEAMCMD=~/.steamcmd
 export SHOOTERGAME=${ATLAS_HOME}/ShooterGame
 
 cd $STEAMCMD
-setfacl -Rm u:10000:rwx ${ATLAS_HOME}
+sudo setfacl -Rm u:10000:rwx ${ATLAS_HOME}
 ./steamcmd.sh +login anonymous +force_install_dir $ATLAS_HOME +app_update 1006030 validate +quit
 if [ -d "$REDIS_DATA" ]; then
     mkdir -p $REDIS_DATA
@@ -22,7 +22,7 @@ if [ -d "$SHOOTERGAME" ]; then
     wget -q https://raw.githubusercontent.com/Zate/atlas_server/master/atlas/ServerGrid.ServerOnly.json
     wget -q https://github.com/Zate/atlas_server/raw/master/atlas/ServerGrid/CellImg_0-0.jpg -O $SHOOTERGAME/ServerGrid/CellImg_0-0.jpg
     wget -q https://github.com/Zate/atlas_server/raw/master/atlas/ServerGrid/MapIMG.jpg -O $SHOOTERGAME/ServerGrid/MapIMG.jpg
-    setfacl -Rm u:10000:rwx ${ATLAS_HOME}
+    sudo setfacl -Rm u:10000:rwx ${ATLAS_HOME}
     exit 1
 fi
 echo "$SHOOTERGAME missing, check update_server.sh has run correctly."
