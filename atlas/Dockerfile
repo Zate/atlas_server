@@ -14,11 +14,12 @@ ARG TZ="Etc/UTC"
 COPY --from=redis-cli /tmp/redis-stable/src/redis-cli /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin/
 RUN apt-get update  && apt-get dist-upgrade -y &&\
-        apt-get install -y iputils-ping wget unzip vim-tiny bzip2 jq iproute2 lib32stdc++6 lib32gcc1 software-properties-common apt-transport-https libcurl3 libcurl-openssl1.0-dev && \
+        apt-get install -y iputils-ping screen wget unzip vim-tiny bzip2 jq iproute2 lib32stdc++6 lib32gcc1 software-properties-common apt-transport-https libcurl3 libcurl-openssl1.0-dev && \
         apt-get clean &&\
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
         echo "$TZ" > /etc/timezone &&\
         ln -fs /usr/share/zoneinfo/$TZ /etc/localtime &&\
+	chmod +x /usr/local/bin/entrypoint.sh && \
         useradd -r -m -u 10000 -s /bin/bash steam
 USER steam
 RUN mkdir -p ~/bin ~/.steamcmd  ~/.steam/sdk32 &&\
