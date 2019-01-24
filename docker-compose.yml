@@ -39,8 +39,12 @@ services:
     env_file: .env-atlas-s
     volumes:
       - "~/.atlas:/home/steam/.atlas"
-    entrypoint: ["/usr/local/bin/entrypoint.sh"]
-    command: ["atlas"]
+    command:
+      - /bin/sh
+      - -c
+      - |
+          screen -dmS atlas -L -U /home/steam/bin/start_server.sh
+          tail -f /dev/null
 
 networks:
   atlas:
