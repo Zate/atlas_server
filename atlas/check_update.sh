@@ -12,8 +12,8 @@ LOCALBID=`cat ${ATLAS_HOME}/steamapps/appmanifest_1006030.acf | grep buildid | c
 REMOTEBID=`${STEAMCMD}/steamcmd.sh +app_info_update 1 +app_info_print 1006030 +quit | grep buildid | cut -d'"' -f4`
 #                                "buildid"               "3497453"
 if [ "$LOCALBID" == "$REMOTEBID" ]; then
-    echo "No update available"
+    echo "No update available - L : ${LOCALBID} R: ${REMOTEBID}"
     exit 1
 fi
 
-echo "Update Availablr .."
+echo "Update Available .. New BID : ${REMOTEBID}"
