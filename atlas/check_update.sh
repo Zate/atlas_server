@@ -6,6 +6,8 @@ export REDIS_DATA=${ATLAS_HOME}/data
 export STEAMCMD=~/.steamcmd
 export SHOOTERGAME=${ATLAS_HOME}/ShooterGame
 
+rm -rf /home/${USER}/Steam/appcache/appinfo.vdf
+
 LOCALBID=`cat ${ATLAS_HOME}/steamapps/appmanifest_1006030.acf | grep buildid | cut -d'"' -f4`
 #        "buildid"               "3497453"
         
