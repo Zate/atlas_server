@@ -1,5 +1,19 @@
 version: '3'
 services:
+  atlas-g:
+    build:
+      context: './gogasm/'
+    image: atlas-g
+    container_name: atlas-g
+    expose:
+      - 80:8081
+    networks:
+        atlas:
+          aliases:
+            - atlas-g
+    restart: on-failure
+    env_file: .env-atlas-g
+    
   atlas-r:
     build:
       context: './redis/'
