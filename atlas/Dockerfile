@@ -33,8 +33,10 @@ RUN apt-get update  && apt-get dist-upgrade -y &&\
         ln -fs /usr/share/zoneinfo/$TZ /etc/localtime &&\
 	chmod +x /usr/local/bin/entrypoint.sh && \
         useradd -r -m -u 10000 -s /bin/bash steam && \
-        mkdir -p /home/steam/web/js
-COPY --from=websocket --chown=steam:steam /tmp/web-vmstats/web/* /home/steam/web/
+        mkdir -p /home/steam/web/js && \
+        chown -R steam:steam /home/steam/web
+COPY --from=websocket /tmp/web-vmstats/web/js /home/steam/web/js
+COPY --from=websocket /tmp/web-vmstats/web/*.* /home/steam/web/
 USER steam
 RUN mkdir -p ~/bin ~/.steamcmd  ~/.steam/sdk32 &&\
         export PATH="~/bin:$PATH" && \
