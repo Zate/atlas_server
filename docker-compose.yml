@@ -36,6 +36,7 @@ services:
       - '${GAMEPORT1}:${GAMEPORT1}/udp' #Gameport1 UDP
       - '${GAMEPORT2}:${GAMEPORT2}/udp' #Gameport2 UDP
       - '${RCONPORT}:${RCONPORT}' #RCON Port TCP
+      - 8081:8081 # Server OS Stats
     env_file: .env-atlas-s
     volumes:
       - "~/.atlas:/home/steam/.atlas"
@@ -44,6 +45,7 @@ services:
       - -c
       - |
           screen -dmS atlas -L -U /home/steam/bin/start_server.sh
+          screen -dms vmstat -L -U websocketd --port 8081 --staticdir=/home/steam/web /usr/bin/vmstat 1 1
           tail -f /dev/null
 
 networks:
