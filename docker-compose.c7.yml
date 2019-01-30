@@ -1,0 +1,52 @@
+version: '3'
+services:
+  atlas-r:
+    build:
+      context: './redis/'
+    image: atlas-r
+    container_name: atlas-r
+    #command: redis-server /usr/redis/redis-cluster.conf --requirepass changeme
+    expose:
+      - "6379"
+    networks:
+        atlas:
+          aliases:
+            - atlas-r
+    restart: on-failure
+    env_file: .env-atlas-r
+    volumes:
+      - /home/${USER}/.atlas/AtlasTools/RedisDatabase/redis.conf:/usr/local/etc/redis/redis.conf
+      - /home/${USER}/.atlas/data:/data
+
+  atlas-s:
+    build:
+      context: './atlas/'
+      dockerfile: Dockerfile.c7
+    image: atlas-c7
+    depends_on:
+            - atlas-r
+    container_name: atlas-s
+    networks:
+      atlas:
+        aliases:
+          - atlas-s
+    ports:
+      - '${ATLASQUERYPORT}:${ATLASQUERYPORT}/udp' #Query UDP
+      - '${ATLASQUERYPORT}:${ATLASQUERYPORT}' #Query TCP
+      - '${SEAMLESSPORT}:${SEAMLESSPORT}' #Seamless TCP
+      - '${GAMEPORT1}:${GAMEPORT1}/udp' #Gameport1 UDP
+      - '${GAMEPORT2}:${GAMEPORT2}/udp' #Gameport2 UDP
+      - '${RCONPORT}:${RCONPORT}' #RCON Port TCP
+    env_file: .env-atlas-s
+    volumes:
+      - "~/.atlas:/home/steam/.atlas"
+    command:
+      - /bin/sh
+      - -c
+      - |
+          screen -dmS atlas -L -U /home/steam/bin/start_server.sh
+          tail -f /dev/null
+
+networks:
+  atlas:
+    driver: bridge

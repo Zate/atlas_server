@@ -1,6 +1,6 @@
-[submodule "atlas/atlas/web-vmstats"]
-	path = atlas/atlas/web-vmstats
-	url = git@github.com:Zate/web-vmstats.git
-[submodule "atlas/atlas/websocketd"]
-	path = atlas/atlas/websocketd
+[submodule "atlas/websocketd"]
+	path = atlas/websocketd
 	url = git@github.com:Zate/websocketd.git
+[submodule "atlas/web-vmstats"]
+	path = atlas/web-vmstats
+	url = git@github.com:Zate/web-vmstats.git
