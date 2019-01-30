@@ -35,8 +35,8 @@ RUN apt-get update  && apt-get dist-upgrade -y &&\
         useradd -r -m -u 10000 -s /bin/bash steam && \
         mkdir -p /home/steam/web/js && \
         chown -R steam:steam /home/steam/web
-COPY --from=websocket /tmp/web-vmstats/web/js /home/steam/web/js
-COPY --from=websocket /tmp/web-vmstats/web/*.* /home/steam/web/
+COPY --from=websocket --chown=steam:steam /tmp/web-vmstats/web/js /home/steam/web/js
+COPY --from=websocket --chown=steam:steam /tmp/web-vmstats/web/*.* /home/steam/web/
 USER steam
 RUN mkdir -p ~/bin ~/.steamcmd  ~/.steam/sdk32 &&\
         export PATH="~/bin:$PATH" && \
@@ -51,6 +51,7 @@ FROM steamcmdbase as atlas-s
 USER root
 RUN mkdir -p /home/steam/.atlas && \
         chown -R steam:steam /home/steam/.atlas && \
+        chown -R steam:steam /home/steam/web && \
         chmod +x /home/steam/bin/*.sh
 #        ./steamcmd.sh +login anonymous +force_install_dir ~/.atlas +app_update 1006030 validate +quit\
 #ENTRYPOINT ["sh","/usr/local/bin/entrypoint.sh"]
