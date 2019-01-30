@@ -7,10 +7,20 @@ RUN apt-get update  && apt-get dist-upgrade -y &&\
 	wget -q http://download.redis.io/redis-stable.tar.gz && \
 	tar xvzf redis-stable.tar.gz && \
 	cd redis-stable/src && \
-	make redis-cli
+	make redis-cli 
+FROM golang:latest as websocket
+ENV DEBIAN_FRONTEND=noninteractive
+ARG TZ="Etc/UTC"
+RUN apt-get update  && apt-get dist-upgrade -y &&\
+        apt-get install -y git && \
+        cd /tmp && \
+        git clone https://github.com/Zate/websocketd.git && \
+        cd websocketd && \
+        go build
 FROM ubuntu:18.04 as steamcmdbase
 ENV DEBIAN_FRONTEND=noninteractive
 ARG TZ="Etc/UTC"
+COPY --from=websocket /tmp/websocketd/websocketd /usr/local/bin
 COPY --from=redis-cli /tmp/redis-stable/src/redis-cli /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin/
 RUN apt-get update  && apt-get dist-upgrade -y &&\
