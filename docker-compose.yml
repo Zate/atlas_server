@@ -45,7 +45,7 @@ services:
       - -c
       - |
           screen -dmS atlas -L -U /home/steam/bin/start_server.sh
-          screen -dms vmstat -L -U websocketd --port 8081 --staticdir=/home/steam/web /usr/bin/vmstat 1 1
+          screen -dmS vmstat -L -U websocketd --port 8081 --staticdir=/home/steam/web /usr/bin/vmstat 1 1
           tail -f /dev/null
 
 networks:
