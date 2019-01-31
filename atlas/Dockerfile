@@ -26,7 +26,7 @@ COPY --from=websocket /tmp/websocketd/websocketd /usr/local/bin
 COPY --from=redis-cli /tmp/redis-stable/src/redis-cli /usr/local/bin/
 COPY entrypoint.sh /usr/local/bin/
 RUN apt-get update  && apt-get dist-upgrade -y &&\
-        apt-get install -y iputils-ping screen wget unzip vim-tiny bzip2 jq iproute2 lib32stdc++6 lib32gcc1 software-properties-common apt-transport-https libcurl3 libcurl-openssl1.0-dev && \
+        apt-get install -y iputils-ping glances screen wget unzip vim-tiny bzip2 jq iproute2 lib32stdc++6 lib32gcc1 software-properties-common apt-transport-https libcurl3 libcurl-openssl1.0-dev && \
         apt-get clean &&\
         rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* && \
         echo "$TZ" > /etc/timezone && \
