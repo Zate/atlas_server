@@ -5,7 +5,12 @@ services:
       context: './gogasm/'
     image: atlas-g
     container_name: atlas-g
+<<<<<<< HEAD
     ports:
+=======
+    hostname: atlas-g
+    expose:
+>>>>>>> b4ac86bdf6e9a8eb1c47231de8c78b6ec986a253
       - 80:8081
     networks:
         atlas:
@@ -19,6 +24,7 @@ services:
       context: './redis/'
     image: atlas-r
     container_name: atlas-r
+    hostname: atlas-g
     #command: redis-server /usr/redis/redis-cluster.conf --requirepass changeme
     expose:
       - "6379"
@@ -39,6 +45,7 @@ services:
     depends_on:
             - atlas-r
     container_name: atlas-s
+    hostname: atlas-s
     networks:
       atlas:
         aliases:
