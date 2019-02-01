@@ -107,7 +107,7 @@ services:
     build:
       context: './traefik/'
     #command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
-    command:  --api --logLevel="DEBUG" --accessLog
+    command:  -c /etc/traefik/traefik.toml --api --logLevel="DEBUG" --accessLog
     ports:
       - "80:80"      # The HTTP port
       - "443:443"    # The HTTPS Port
