@@ -88,7 +88,7 @@ services:
       - "traefik.enable=true"
       - "traefik.backend=atlas-s"
     #  - "traefik.frontend.rule=Host:portainer.${DOMAINNAME}"  
-      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /${TILE}"
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /a1"
       - "traefik.port=61208"
       - "traefik.docker.network=proxy"
       - "traefik.frontend.headers.SSLRedirect=true"

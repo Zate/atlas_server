@@ -16,12 +16,14 @@ logLevel = "DEBUG"
 [retry]
 
 [acme]
+acmeLogging = true
 email = "zate75@gmail.com"
-storageFile = "/etc/traefik/acme.json"
+storage = "/etc/traefik/acme.json"
 entryPoint = "https"
 onHostRule = true
-  [acme.httpChallenge]
-    entryPoint = "http"
+ # [acme.httpChallenge]
+ #   entryPoint = "http"
+ [acme.tlsChallenge]
 
 
 
