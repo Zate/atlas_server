@@ -6,14 +6,30 @@ services:
     image: atlas-g
     container_name: atlas-g
     hostname: atlas-g
-    ports:
-      - 80:8081
+    expose:
+      - "8081"
     networks:
         atlas:
           aliases:
             - atlas-g
     restart: on-failure
     env_file: .env-atlas-g
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=atlas-g"
+      - "traefik.frontend.rule=Host:${DOMAINNAME}"  
+ #     - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /${TILE}"
+      - "traefik.port=8081"
+      - "traefik.docker.network=proxy"
+      - "traefik.frontend.headers.SSLRedirect=true"
+      - "traefik.frontend.headers.STSSeconds=315360000"
+      - "traefik.frontend.headers.browserXSSFilter=true"
+      - "traefik.frontend.headers.contentTypeNosniff=true"
+      - "traefik.frontend.headers.forceSTSHeader=true"
+      - "traefik.frontend.headers.SSLHost=${DOMAINNAME}"
+      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+      - "traefik.frontend.headers.STSPreload=true"
+      - "traefik.frontend.headers.frameDeny=true"
     
   atlas-r:
     build:
@@ -46,6 +62,7 @@ services:
       atlas:
         aliases:
           - atlas-s
+    restart: on-failure
     ports:
       - '${ATLASQUERYPORT}:${ATLASQUERYPORT}/udp' #Query UDP
       - '${ATLASQUERYPORT}:${ATLASQUERYPORT}' #Query TCP
@@ -64,8 +81,61 @@ services:
       - |
           screen -dmS atlas -L -U /home/steam/bin/start_server.sh
           screen -dmS glances -L -U glances -w
-          #screen -dmS vmstat -L -U websocketd --port 8081 --staticdir=/home/steam/web /usr/bin/vmstat 1 1
           tail -f /dev/null
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=atlas-s"
+    #  - "traefik.frontend.rule=Host:portainer.${DOMAINNAME}"  
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /${TILE}"
+      - "traefik.port=61208"
+      - "traefik.docker.network=proxy"
+      - "traefik.frontend.headers.SSLRedirect=true"
+      - "traefik.frontend.headers.STSSeconds=315360000"
+      - "traefik.frontend.headers.browserXSSFilter=true"
+      - "traefik.frontend.headers.contentTypeNosniff=true"
+      - "traefik.frontend.headers.forceSTSHeader=true"
+      - "traefik.frontend.headers.SSLHost=${DOMAINNAME}"
+      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+      - "traefik.frontend.headers.STSPreload=true"
+      - "traefik.frontend.headers.frameDeny=true"
+
+# The reverse proxy service (Traefik)
+  atlas-t:
+    image: atlas-t  # The official Traefik docker image
+    build:
+      context: './traefik/'
+    command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
+    ports:
+      - "80:80"      # The HTTP port
+      - "443:443"    # The HTTPS Port
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock  # So that Traefik can listen to the Docker events
+    container_name: atlas-t
+    hostname: atlas-t
+    env_file: .env-atlas-t
+    networks:
+      atlas:
+        aliases:
+          - atlas-t
+    restart: on-failure
+    domainname: ${DOMAINNAME}
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=atlas-t"
+    #  - "traefik.frontend.rule=Host:admin.${DOMAINNAME}"  
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /traefik"
+      - "traefik.port=8080"
+      - "traefik.docker.network=proxy"
+      - "traefik.frontend.headers.SSLRedirect=true"
+      - "traefik.frontend.headers.STSSeconds=315360000"
+      - "traefik.frontend.headers.browserXSSFilter=true"
+      - "traefik.frontend.headers.contentTypeNosniff=true"
+      - "traefik.frontend.headers.forceSTSHeader=true"
+      - "traefik.frontend.headers.SSLHost=${DOMAINNAME}"
+      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+      - "traefik.frontend.headers.STSPreload=true"
+      - "traefik.frontend.headers.frameDeny=true"
+      
 
 networks:
   atlas:

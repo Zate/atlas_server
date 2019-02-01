@@ -1,0 +1,26 @@
+defaultEntryPoints = ["http", "https"]
+[web]
+address = ":8080"
+  [web.auth.basic]
+  users = ["admin:$apr1$oi4KIOnn$3.aUPFYCAD7YuakeE.mbj."]
+[entryPoints]
+  [entryPoints.http]
+  address = ":80"
+    [entryPoints.http.redirect]
+      entryPoint = "https"
+  [entryPoints.https]
+  address = ":443"
+    [entryPoints.https.tls]
+[acme]
+email = "zate75@gmail.com"
+storage = "acme.json"
+entryPoint = "https"
+onHostRule = true
+onDemand = false
+[acme.dnsChallenge]
+  provider = "cloudflare"
+  delayBeforeCheck = 0
+dnsProvider = "cloudflare"
+[[acme.domains]]
+   main = "zate.org"
+   sans = ["ide.zate.org", "admin.zate.org", "lua.zate.org", "poerand.zate.org"]
