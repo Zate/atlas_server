@@ -37,7 +37,6 @@ services:
     image: atlas-r
     container_name: atlas-r
     hostname: atlas-g
-    #command: redis-server /usr/redis/redis-cluster.conf --requirepass changeme
     expose:
       - "6379"
     networks:
