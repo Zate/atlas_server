@@ -25,14 +25,11 @@ onHostRule = true
  #   entryPoint = "http"
  [acme.tlsChallenge]
 
-
-
 [[acme.domains]]
   main = "atlas.zate.systems"
 
 [api]
 entrypoint = "dashboard"
-
 
 [docker]
 
