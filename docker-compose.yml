@@ -13,7 +13,8 @@ services:
           aliases:
             - atlas-g
     restart: on-failure
-    env_file: .env-atlas-g
+    env_file: 
+      - .env-atlas-g
     labels:
       - "traefik.enable=true"
       - "traefik.backend=atlas-g"
@@ -44,7 +45,8 @@ services:
           aliases:
             - atlas-r
     restart: on-failure
-    env_file: .env-atlas-r
+    env_file: 
+      - .env-atlas-r
     volumes:
       - /home/${USER}/.atlas/AtlasTools/RedisDatabase/redis.conf:/usr/local/etc/redis/redis.conf
       - /home/${USER}/.atlas/data:/data
@@ -71,7 +73,8 @@ services:
       - '${RCONPORT}:${RCONPORT}' #RCON Port TCP
     expose:
       - "61208"
-    env_file: .env-atlas-s
+    env_file: 
+      - .env-atlas-s
     volumes:
       - "~/.atlas:/home/steam/.atlas"
     command:
