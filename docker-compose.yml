@@ -106,7 +106,8 @@ services:
     image: atlas-t  # The official Traefik docker image
     build:
       context: './traefik/'
-    command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
+    #command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
+    #command:  
     ports:
       - "80:80"      # The HTTP port
       - "443:443"    # The HTTPS Port

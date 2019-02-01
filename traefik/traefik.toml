@@ -1,26 +1,43 @@
-defaultEntryPoints = ["http", "https"]
-[web]
-address = ":8080"
-  [web.auth.basic]
-  users = ["admin:$apr1$oi4KIOnn$3.aUPFYCAD7YuakeE.mbj."]
+debug = false
+logLevel = "DEBUG"
+
+
 [entryPoints]
+  [entryPoints.dashboard]
+    address = ":8080"
   [entryPoints.http]
-  address = ":80"
-    [entryPoints.http.redirect]
-      entryPoint = "https"
+    address = ":80"
+      [entryPoints.http.redirect]
+        entryPoint = "https"
   [entryPoints.https]
-  address = ":443"
-    [entryPoints.https.tls]
+    address = ":443"
+      [entryPoints.https.tls]
+
+[retry]
+
 [acme]
 email = "zate75@gmail.com"
-storage = "acme.json"
+storageFile = "/etc/traefik/acme.json"
 entryPoint = "https"
 onHostRule = true
-onDemand = false
-[acme.dnsChallenge]
-  provider = "cloudflare"
-  delayBeforeCheck = 0
-dnsProvider = "cloudflare"
+  [acme.httpChallenge]
+    entryPoint = "http"
+
+
+
 [[acme.domains]]
-   main = "zate.org"
-   sans = ["ide.zate.org", "admin.zate.org", "lua.zate.org", "poerand.zate.org"]
+  main = "atlas.zate.systems"
+
+[api]
+entrypoint = "dashboard"
+
+
+[docker]
+
+endpoint = "unix:///var/run/docker.sock"
+
+domain = "atlas.zate.systems"
+
+watch = true
+exposedByDefault = false
+network = "atlas"
