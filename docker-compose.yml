@@ -1,4 +1,4 @@
-version: '3'
+version: '3.5'
 services:
   atlas-g:
     build:
@@ -150,4 +150,5 @@ services:
 
 networks:
   atlas:
+    name: atlas
     driver: bridge
