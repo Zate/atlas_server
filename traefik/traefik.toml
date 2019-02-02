@@ -1,5 +1,6 @@
 debug = true
 logLevel = "DEBUG"
+keepTrailingSlash = true
 
 defaultEntryPoints = ["https","http"]
 
