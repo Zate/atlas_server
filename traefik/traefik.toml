@@ -3,8 +3,8 @@ logLevel = "DEBUG"
 
 
 [entryPoints]
-  [entryPoints.dashboard]
-    address = ":8080"
+  # [entryPoints.dashboard]
+  #   address = ":8080"
   [entryPoints.http]
     address = ":80"
       [entryPoints.http.redirect]
@@ -28,8 +28,8 @@ onHostRule = true
 [[acme.domains]]
   main = "atlas.zate.systems"
 
-[api]
-entrypoint = "dashboard"
+# [api]
+# entrypoint = "dashboard"
 
 [docker]
 
