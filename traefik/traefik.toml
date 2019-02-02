@@ -1,10 +1,8 @@
-debug = false
+debug = true
 logLevel = "DEBUG"
 
 
 [entryPoints]
-  # [entryPoints.dashboard]
-  #   address = ":8080"
   [entryPoints.http]
     address = ":80"
       [entryPoints.http.redirect]
@@ -21,15 +19,10 @@ email = "zate75@gmail.com"
 storage = "/etc/traefik/acme.json"
 entryPoint = "https"
 onHostRule = true
- # [acme.httpChallenge]
- #   entryPoint = "http"
- [acme.tlsChallenge]
+[acme.tlsChallenge]
 
 [[acme.domains]]
   main = "atlas.zate.systems"
-
-# [api]
-# entrypoint = "dashboard"
 
 [docker]
 
