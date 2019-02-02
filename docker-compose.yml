@@ -117,6 +117,8 @@ services:
       - "443:443"    # The HTTPS Port
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock  # So that Traefik can listen to the Docker events
+      - ./traefik/traefik.toml:/etc/traefik/traefik.toml
+      - ./traefik/acme.json:/etc/traefik/acme.json
     container_name: atlas-t
     hostname: atlas-t
     env_file: .env-atlas-t
