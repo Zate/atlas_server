@@ -128,6 +128,8 @@ services:
           - atlas-t
     restart: on-failure
     domainname: ${DOMAINNAME}
+    expose:
+      - "8080"
     labels:
       - "traefik.enable=true"
       - "traefik.backend=atlas-t"
