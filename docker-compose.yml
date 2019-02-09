@@ -58,20 +58,6 @@ services:
     volumes:
       - /home/${USER}/.atlas/AtlasTools/RedisDatabase/redis.conf:/usr/local/etc/redis/redis.conf
       - /home/${USER}/.atlas/data:/data
-  
-  atlas-d:
-    build:
-      context: './db/'
-    image: atlas-d
-    container_name: atlas-d
-    hostname: atlas-g
-    expose:
-      - "3133"
-    networks:
-        atlas:
-          aliases:
-            - atlas-d
-    restart: on-failure
 
   atlas-s:
     build:
