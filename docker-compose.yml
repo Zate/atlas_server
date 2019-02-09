@@ -13,6 +13,11 @@ services:
           aliases:
             - atlas-g
     restart: on-failure
+    command:
+      - /bin/sh
+      - -c
+      - |
+          /gogasm -web 8081
     depends_on:
         - atlas-t
         - atlas-d
