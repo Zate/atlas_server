@@ -10,6 +10,7 @@ RUN git clone https://github.com/Zate/gogasm.git && \
 FROM scratch
 WORKDIR /
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
+COPY --from=builder /go/src/github.com/zate/gogasm/cmd/frontend .
 COPY --from=builder /go/src/github.com/zate/gogasm/cmd/gogasm .
 #EXPOSE 2086
 CMD ["/gogasm", "-web", "8081"]
