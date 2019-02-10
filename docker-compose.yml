@@ -33,7 +33,6 @@ services:
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
-    cpuset: 3
     
   atlas-r:
     build:
@@ -53,7 +52,6 @@ services:
     volumes:
       - /home/${USER}/.atlas/AtlasTools/RedisDatabase/redis.conf:/usr/local/etc/redis/redis.conf
       - /home/${USER}/.atlas/data:/data
-    cpuset: 3
 
   atlas-s:
     build:
@@ -148,7 +146,6 @@ services:
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
-    cpuset: 0
       
   influxdb:
     # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
@@ -174,7 +171,6 @@ services:
         aliases:
           - influxdb
     restart: on-failure
-    cpuset: 2
 
   kapacitor:
   # Full tag list: https://hub.docker.com/r/library/kapacitor/tags/
@@ -202,7 +198,6 @@ services:
         aliases:
           - kapacitor
     restart: on-failure
-    cpuset: 3
 
   chronograf:
     # Full tag list: https://hub.docker.com/r/library/chronograf/tags/
@@ -247,7 +242,6 @@ services:
       - "traefik.frontend.headers.STSIncludeSubdomains=true"
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
-    cpuset: 2
       
   telegraf:
     # Full tag list: https://hub.docker.com/r/library/telegraf/tags/
@@ -268,7 +262,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - influxdb
-    cpuset: 3
 
 networks:
   atlas:
