@@ -3,23 +3,23 @@ services:
   atlas-g:
     build:
       context: './gogasm/'
-    image: atlas-g
-    container_name: atlas-g
-    hostname: atlas-g
+    image: gogasm
+    container_name: gogasm
+    hostname: gogasm
     expose:
       - "8081"
     networks:
         atlas:
           aliases:
-            - atlas-g
+            - gogasm
     restart: on-failure
     depends_on:
-        - atlas-t
+        - traefik
     env_file: 
-      - .env-atlas-g
+      - .env-gogasm
     labels:
       - "traefik.enable=true"
-      - "traefik.backend=atlas-g"
+      - "traefik.backend=gogasm"
       - "traefik.frontend.rule=Host:${DOMAINNAME}"  
  #     - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /${TILE}"
       - "traefik.port=8081"
@@ -36,7 +36,7 @@ services:
     
 # The reverse proxy service (Traefik)
   atlas-t:
-    image: atlas-t  # The official Traefik docker image
+    image: traefik  # The official Traefik docker image
     build:
       context: './traefik/'
     #command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
@@ -48,20 +48,20 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock  # So that Traefik can listen to the Docker events
       - ./traefik/traefik.toml:/etc/traefik/traefik.toml
       - ./traefik/acme.json:/etc/traefik/acme.json
-    container_name: atlas-t
-    hostname: atlas-t
-    env_file: .env-atlas-t
+    container_name: traefik
+    hostname: traefik
+    env_file: .env-traefik
     networks:
       atlas:
         aliases:
-          - atlas-t
+          - traefik
     restart: on-failure
     domainname: ${DOMAINNAME}
     expose:
       - "8080"
     labels:
       - "traefik.enable=true"
-      - "traefik.backend=atlas-t"
+      - "traefik.backend=traefik"
     #  - "traefik.frontend.rule=Host:admin.${DOMAINNAME}"  
       - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /traefik"
       - "traefik.port=8080"

@@ -25,8 +25,6 @@ services:
     image: atlas-s
     depends_on:
             - atlas-r
-            - atlas-t
-            - atlas-g
     container_name: atlas-s
     hostname: atlas-s
     networks:
