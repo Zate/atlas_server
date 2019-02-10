@@ -172,6 +172,32 @@ services:
           - influxdb
     restart: on-failure
 
+  kapacitor:
+  # Full tag list: https://hub.docker.com/r/library/kapacitor/tags/
+    build:
+      context: ./tick/kapacitor/
+    image: "kapacitor"
+    container_name: kapacitor
+    hostname: kapacitor
+    #env_file: .env-atlas-t
+    volumes:
+      # Mount for kapacitor data directory
+      - ./kapacitor/data/:/var/lib/kapacitor
+      # Mount for kapacitor configuration
+      - ./kapacitor/config/:/etc/kapacitor/
+    # Kapacitor requires network access to Influxdb
+    links:
+      - influxdb
+    depends_on:
+      - influxdb
+    expose:
+      # The API for Kapacitor is served on port 9092
+      - "9092"
+    networks:
+      atlas:
+        aliases:
+          - kapacitor
+    restart: on-failure
 
 
 networks:
