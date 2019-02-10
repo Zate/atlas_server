@@ -216,6 +216,7 @@ services:
       atlas:
         aliases:
           - chronograf
+    restart: on-failure
     links:
       # Chronograf requires network access to InfluxDB and Kapacitor
       - influxdb
@@ -232,9 +233,9 @@ services:
       - "traefik.backend=chronograf"
     #  - "traefik.frontend.rule=Host:admin.${DOMAINNAME}"  
       - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /tick"
-      # - "traefik.frontend.redirect.regex=^(.*)/tick$$"
-      # - "traefik.frontend.redirect.replacement=$$1/tick/"
-      # - "traefik.frontend.rule=Host:${DOMAINNAME};PathPrefix:/tick;ReplacePathRegex: ^/tick/(.*) /$$1"
+      - "traefik.frontend.redirect.regex=^(.*)/tick$$"
+      - "traefik.frontend.redirect.replacement=$$1/tick/"
+      - "traefik.frontend.rule=Host:${DOMAINNAME};PathPrefix:/tick;ReplacePathRegex: ^/tick/(.*) /$$1"
       - "traefik.port=8888"
       - "traefik.docker.network=atlas"
       - "traefik.frontend.headers.SSLRedirect=true"
