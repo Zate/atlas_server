@@ -207,7 +207,8 @@ services:
     container_name: chronograf
     hostname: chronograf
     environment:
-      RESOURCES_PATH: "/usr/share/chronograf/resources"
+      - RESOURCES_PATH: "/usr/share/chronograf/resources"
+      - BASE_PATH: /tick
     volumes:
       # Mount for chronograf database
       - ./tick/chronograf/data/:/var/lib/chronograf/
