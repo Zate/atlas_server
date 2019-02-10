@@ -1,0 +1,77 @@
+version: '3.5'
+services:
+  atlas-r:
+    build:
+      context: './redis/'
+    image: atlas-r
+    container_name: atlas-r
+    hostname: atlas-r
+    expose:
+      - "6379"
+    networks:
+        atlas:
+          aliases:
+            - atlas-r
+    restart: on-failure
+    env_file: 
+      - .env-atlas-r
+    volumes:
+      - /home/${USER}/.atlas/AtlasTools/RedisDatabase/redis.conf:/usr/local/etc/redis/redis.conf
+      - /home/${USER}/.atlas/data:/data
+
+  atlas-s:
+    build:
+      context: './'
+    image: atlas-s
+    depends_on:
+            - atlas-r
+            - atlas-t
+            - atlas-g
+    container_name: atlas-s
+    hostname: atlas-s
+    networks:
+      atlas:
+        aliases:
+          - atlas-s
+    restart: on-failure
+    ports:
+      - '${ATLASQUERYPORT}:${ATLASQUERYPORT}/udp' #Query UDP
+      - '${ATLASQUERYPORT}:${ATLASQUERYPORT}' #Query TCP
+      - '${SEAMLESSPORT}:${SEAMLESSPORT}' #Seamless TCP
+      - '${GAMEPORT1}:${GAMEPORT1}/udp' #Gameport1 UDP
+      - '${GAMEPORT2}:${GAMEPORT2}/udp' #Gameport2 UDP
+      - '${RCONPORT}:${RCONPORT}' #RCON Port TCP
+    expose:
+      - "61208"
+    env_file: 
+      - .env-atlas-s
+    volumes:
+      - "~/.atlas:/home/steam/.atlas"
+    command:
+      - /bin/sh
+      - -c
+      - |
+          screen -dmS atlas -L -U /home/steam/bin/start_server.sh
+          screen -dmS glances -L -U glances -w
+          tail -f /dev/null
+    labels:
+      - "traefik.enable=true"
+      - "traefik.backend=atlas-s"
+    #  - "traefik.frontend.rule=Host:portainer.${DOMAINNAME}"  
+      - "traefik.frontend.rule=Host:${DOMAINNAME}; PathPrefixStrip: /a1"
+      - "traefik.port=61208"
+      - "traefik.docker.network=atlas"
+      - "traefik.frontend.headers.SSLRedirect=true"
+      - "traefik.frontend.headers.STSSeconds=315360000"
+      - "traefik.frontend.headers.browserXSSFilter=true"
+      - "traefik.frontend.headers.contentTypeNosniff=true"
+      - "traefik.frontend.headers.forceSTSHeader=true"
+      - "traefik.frontend.headers.SSLHost=${DOMAINNAME}"
+      - "traefik.frontend.headers.STSIncludeSubdomains=true"
+      - "traefik.frontend.headers.STSPreload=true"
+      - "traefik.frontend.headers.frameDeny=true"
+
+networks:
+  atlas:
+    name: atlas
+    driver: bridge
