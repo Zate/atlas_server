@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  atlas-g:
+  gogasm:
     build:
       context: './gogasm/'
     image: gogasm
@@ -35,7 +35,7 @@ services:
       - "traefik.frontend.headers.frameDeny=true"
     
 # The reverse proxy service (Traefik)
-  atlas-t:
+  traefik:
     image: traefik  # The official Traefik docker image
     build:
       context: './traefik/'
