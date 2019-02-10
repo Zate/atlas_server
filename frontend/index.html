@@ -1,0 +1,27 @@
+{{define "index.html"}}
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        
+        <meta name="description" content={{index . "desc"}}>
+        <meta name="author" content={{index . "author"}}>
+
+        <link rel="stylesheet" href="https://unpkg.com/@coreui/coreui/dist/css/coreui.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/@coreui/icons/css/coreui-icons.min.css">
+        <link rel="stylesheet" href="css/styles.css?v=1.0">
+        <title>GOGASM | {{index . "name"}}</title>
+    </head> 
+    <body class="app header-fixed">
+        {{template "header" .}}
+        <div class="app-body">
+            {{template "nav" .}}
+        
+            {{template "main" . }}
+        </div>
+        {{template "footer" . }}
+        {{template "script" . }}
+    </body>
+  </html>
+{{end}}

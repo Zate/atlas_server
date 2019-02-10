@@ -16,7 +16,12 @@ package cmd
 
 import (
 	"fmt"
+	"html/template"
+	"io"
+	"net/http"
 
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"github.com/spf13/cobra"
 )
 
@@ -32,7 +37,49 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		fmt.Println("setup called")
+		initWeb()
 	},
+}
+
+// TemplateRegistry struct
+type TemplateRegistry struct {
+	templates *template.Template
+}
+
+// Render Implement e.Renderer interface
+func (t *TemplateRegistry) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+	return t.templates.ExecuteTemplate(w, name, data)
+}
+
+func initWeb() {
+	e := echo.New()
+	e.Static("/css", "frontend/css")
+	e.File("/favicon.ico", "favicon.ico")
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+	e.HideBanner = true
+	e.Use(middleware.CORSWithConfig(middleware.CORSConfig{
+		AllowOrigins: []string{"*"},
+		AllowMethods: []string{echo.GET, echo.PUT, echo.POST, echo.DELETE},
+	}))
+
+	e.Renderer = &TemplateRegistry{
+		templates: template.Must(template.ParseGlob("frontend/*.html")),
+	}
+
+	e.GET("/", startSetup)
+	e.Logger.Fatal(e.Start(":1323"))
+}
+
+func startSetup(c echo.Context) error {
+	// return c.String(http.StatusOK, "Hello, World!")
+
+	return c.Render(http.StatusOK, "index.html", map[string]interface{}{
+		"name":   "Go Gaming Automated Server Manager",
+		"msg":    "Hello, Yeeter",
+		"author": "Bobblehead",
+		"desc":   "Manager for Atlas Server Grid on Docker",
+	})
 }
 
 func init() {
