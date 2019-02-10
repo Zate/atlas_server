@@ -147,6 +147,32 @@ services:
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
       
+influxdb:
+    # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
+    build:
+      context: ./tick/influxdb/
+    image: "influxdb"
+    volumes:
+      # Mount for influxdb data directory
+      - ./influxdb/data:/var/lib/influxdb
+      # Mount for influxdb configuration
+      - ./influxdb/config/:/etc/influxdb/
+    expose:
+      # The API for InfluxDB is served on port 8086
+      - "8086"
+      - "8082"
+      # UDP Port
+      - "8089"
+    container_name: influxdb
+    hostname: influxdb
+    #env_file: .env-atlas-t
+    networks:
+      atlas:
+        aliases:
+          - influxdb
+    restart: on-failure
+
+
 
 networks:
   atlas:
