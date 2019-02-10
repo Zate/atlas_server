@@ -147,7 +147,7 @@ services:
       - "traefik.frontend.headers.STSPreload=true"
       - "traefik.frontend.headers.frameDeny=true"
       
-influxdb:
+  influxdb:
     # Full tag list: https://hub.docker.com/r/library/influxdb/tags/
     build:
       context: ./tick/influxdb/
