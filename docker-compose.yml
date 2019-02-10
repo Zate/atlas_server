@@ -266,6 +266,10 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - influxdb
+    networks:
+      atlas:
+        aliases:
+          - telegraf
 
 networks:
   atlas:
