@@ -21,6 +21,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"os"
 	"os/exec"
 	"strconv"
 
@@ -167,9 +168,16 @@ func startSetup(c echo.Context) error {
 		main += `</div>	
 				  </div>`
 	}
-	path = ""
-	path, st, err := checkSteam()
-	log.Printf("Output: %v", do)
+	t, err := os.Stat("~/.steamcmd")
+	if err != nil {
+		log.Printf("%v", err)
+	} else {
+		log.Printf("File info : %v", t.Name())
+	}
+
+	// path = ""
+	// path, st, err := checkSteam()
+	// log.Printf("Output: %v", path)
 	if err != nil || path == "" {
 		if err != nil {
 			main += `<div class="alert alert-danger" role="alert">Error checking for Steamcmd: `
@@ -185,17 +193,18 @@ func startSetup(c echo.Context) error {
 					<div class="list-group-item list-group-item-accent-success list-group-item-success">Steamcmd <span class="badge badge-success">Success</span></div>
 					<div class="list-group-item list-group-item-accent-success">Path : `
 		main += path
-		main += `</div>
-					<div class="list-group-item list-group-item-accent-success">Version : `
-		main += st
-		main += `</div>
-					<div class="list-group-item list-group-item-accent-success">OS : `
-		main += st
-		main += `</div>
-					<div class="list-group-item list-group-item-accent-success">Go Version : `
-		main += st
+		// main += `</div>
+		// 			<div class="list-group-item list-group-item-accent-success">Version : `
+		// main += st
+		// main += `</div>
+		// 			<div class="list-group-item list-group-item-accent-success">OS : `
+		// main += st
+		// main += `</div>
+		// 			<div class="list-group-item list-group-item-accent-success">Go Version : `
+		// main += st
 		main += `</div>	
-				  </div>`
+				  </div>
+				  `
 	}
 
 	// Ok here we likely need to check it we have a config file
