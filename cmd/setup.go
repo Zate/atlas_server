@@ -59,7 +59,6 @@ type Setup struct {
 func (s *Setup) login(c echo.Context) error {
 	//username := c.FormValue("username")
 	password := c.FormValue("password")
-	c.
 
 	if password == s.password {
 		// Create token
@@ -187,7 +186,7 @@ func initWeb() {
 	}
 
 	e.POST("/login", s.login)
-	e.GET("/login", )
+	e.GET("/login", s.login)
 	// e.POST("/refresh", jwt.RefreshTokenHandler())
 	// r := e.Group("/restricted")
 	// r.Use(jwt.AuthRequired())
@@ -237,7 +236,7 @@ func startSetup(c echo.Context) error {
 
 	// check if we are authed.
 	user := c.Get("user").(*jwt.Token)
-	if user = "authed" {
+	if user == "authed" {
 		return c.Redirect(http.StatusMovedPermanently, "/")
 	}
 
