@@ -15,6 +15,7 @@
 package cmd
 
 import (
+	"crypto/rand"
 	"encoding/json"
 	"fmt"
 	"html/template"
@@ -24,7 +25,9 @@ import (
 	"os"
 	"os/exec"
 	"strconv"
+	"time"
 
+	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/spf13/cobra"
@@ -44,6 +47,52 @@ to quickly create a Cobra application.`,
 		fmt.Println("setup called")
 		initWeb()
 	},
+}
+
+// Setup is a struct we make to add values to and then create funcs in to pass
+// as the handler so that it has both the context and the values we put in it.
+type Setup struct {
+	password string
+	secret   string
+}
+
+func (s *Setup) login(c echo.Context) error {
+	//username := c.FormValue("username")
+	password := c.FormValue("password")
+	c.
+
+	if password == s.password {
+		// Create token
+		token := jwt.New(jwt.SigningMethodHS256)
+
+		// Set claims
+		claims := token.Claims.(jwt.MapClaims)
+		claims["name"] = "authed"
+		claims["admin"] = true
+		claims["exp"] = time.Now().Add(time.Hour * 72).Unix()
+
+		// Generate encoded token and send it as response.
+		t, err := token.SignedString([]byte(s.secret))
+		if err != nil {
+			return err
+		}
+		return c.JSON(http.StatusOK, map[string]string{
+			"token": t,
+		})
+	}
+
+	return echo.ErrUnauthorized
+}
+
+func accessible(c echo.Context) error {
+	return c.String(http.StatusOK, "Accessible")
+}
+
+func restricted(c echo.Context) error {
+	user := c.Get("user").(*jwt.Token)
+	claims := user.Claims.(jwt.MapClaims)
+	name := claims["name"].(string)
+	return c.String(http.StatusOK, "Welcome "+name+"!")
 }
 
 // Check if steamcmd is installed and functional
@@ -107,6 +156,21 @@ func (t *TemplateRegistry) Render(w io.Writer, name string, data interface{}, c 
 }
 
 func initWeb() {
+	// We need Auth
+	// https://auth0.com/blog/authentication-in-golang/
+
+	pwd, err := pwGen(12)
+	if err != nil {
+		log.Panicf("pwGen failed generating pwd : %v", err)
+	}
+	log.Printf("Go to http://localhost:1323 and login with %v", pwd)
+	sec, err := pwGen(12)
+	if err != nil {
+		log.Panicf("pwGen failed generating sec : %v", err)
+	}
+
+	s := &Setup{password: pwd, secret: sec}
+
 	e := echo.New()
 	e.Static("/css", "frontend/css")
 	e.File("/favicon.ico", "favicon.ico")
@@ -122,14 +186,61 @@ func initWeb() {
 		templates: template.Must(template.ParseGlob("frontend/*.html")),
 	}
 
-	e.GET("/", startSetup)
-	e.GET("/step/:id", doStep)
+	e.POST("/login", s.login)
+	e.GET("/login", )
+	// e.POST("/refresh", jwt.RefreshTokenHandler())
+	// r := e.Group("/restricted")
+	// r.Use(jwt.AuthRequired())
+	//r.GET("", restricted)
+	r := e.Group("/")
+	r.Use(middleware.JWT([]byte(s.secret)))
+	r.GET("", startSetup)
+	r.GET("step/:id", doStep)
 	e.Logger.Fatal(e.Start(":1323"))
 }
 
 func startSetup(c echo.Context) error {
 
-	// return c.String(http.StatusOK, "Hello, World!")
+	// What do we need to check?
+	// Ubuntu LTS
+	//		- Current
+	//		- Local
+	// Docker
+	//		- Current
+	//		- Local
+	// Docker-compose
+	//		- Current
+	//		- Local
+	// Steamcmd
+	//		- Current
+	//		- Local
+	// Atlas Binaries
+	//		- Current
+	//		- Local
+	// Environment Variables
+	//		- TZ (Default: Etc/UTC)
+	//		- DOMAINNAME
+	//			- existing domain
+	//			- dyndns domain
+	// 		- ATLASIP (Get this from the domain)
+	// 		- GAMEPORT1 (Default: 27005)
+	// 		- GAMEPORT2 (Default: 27006)
+	// 		- ATLASQUERYPORT (Default: 27015)
+	// 		- RCONPORT (Default: 27025)
+	// 		- SEAMLESSPORT (Default: 27020)
+	// 		- ADMINPASS (Default: create a random one)
+	//
+	// If those are all installed and at the right versions
+	// Check container status
+	// 		- Redis
+	//		- Atlas Server (1x1)
+
+	// check if we are authed.
+	user := c.Get("user").(*jwt.Token)
+	if user = "authed" {
+		return c.Redirect(http.StatusMovedPermanently, "/")
+	}
+
 	pagination := `<nav aria-label="Game Server Setup">
 		<ul class="pagination justify-content-center">
 		  <li class="page-item disabled">
@@ -288,6 +399,7 @@ func doStep(c echo.Context) error {
 }
 
 func init() {
+
 	rootCmd.AddCommand(setupCmd)
 
 	// Here you will define your flags and configuration settings.
@@ -299,4 +411,27 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// setupCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func pwGen(n int) (string, error) {
+
+	const chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+	bytes, err := bytesGen(n)
+	if err != nil {
+		return "", err
+	}
+	for i, b := range bytes {
+		bytes[i] = chars[b%byte(len(chars))]
+	}
+	return string(bytes), nil
+}
+
+func bytesGen(n int) ([]byte, error) {
+	b := make([]byte, n)
+	_, err := rand.Read(b)
+	if err != nil {
+		return nil, err
+	}
+
+	return b, nil
 }
